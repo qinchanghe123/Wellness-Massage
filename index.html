@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Massage | Santa Ana, CA</title>
+
+  <style>
+    :root {
+      --cream: #f8f1e6;
+      --sand: #e8d6bd;
+      --brown: #5d4030;
+      --dark: #2f241d;
+      --gold: #c4955b;
+      --white: #ffffff;
+      --muted: #7a6a5d;
+      --shadow: 0 20px 45px rgba(47, 36, 29, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(47, 36, 29, 0.62);
+      backdrop-filter: blur(14px);
+      color: var(--white);
+    }
+
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--sand);
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 7% 80px;
+      color: var(--white);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      transform: scale(1.04);
+    }
+
+    .hero-bg.active {
+      opacity: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        rgba(34, 24, 17, 0.62),
+        rgba(34, 24, 17, 0.42)
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.8rem;
+      margin-bottom: 18px;
+      color: var(--sand);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      line-height: 1;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      font-family: Arial, sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      max-width: 680px;
+      margin: 0 auto 34px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 34px;
+      border-radius: 999px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      background: var(--gold);
+      color: var(--white);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: #a97842;
+    }
+
+    section {
+      padding: 90px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-title span {
+      display: block;
+      font-family: Arial, sans-serif;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.15;
+    }
+
+    .about {
+      background: var(--white);
+    }
+
+    .about-box {
+      max-width: 950px;
+      margin: 0 auto;
+      background: var(--cream);
+      padding: 46px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .about-box p {
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .service-carousel {
+      height: 270px;
+      position: relative;
+      overflow: hidden;
+      background: #ddd;
+    }
+
+    .service-carousel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 0.8s ease, transform 1.2s ease;
+    }
+
+    .service-carousel img.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .service-content {
+      padding: 28px;
+    }
+
+    .service-content h3 {
+      font-size: 1.55rem;
+      margin-bottom: 10px;
+    }
+
+    .service-content p {
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+    }
+
+    .price-list {
+      display: grid;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-top: 1px solid #eadfce;
+      font-weight: 700;
+    }
+
+    .price-row strong {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    .booking {
+      background: linear-gradient(135deg, #4d3628, #2f241d);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .booking-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .booking-card h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 16px;
+    }
+
+    .booking-card p {
+      font-family: Arial, sans-serif;
+      color: #eadfce;
+      margin-bottom: 28px;
+    }
+
+    .testimonials {
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    .review-row {
+      display: flex;
+      width: max-content;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .review-row.left {
+      animation: scrollLeft 45s linear infinite;
+    }
+
+    .review-row.right {
+      animation: scrollRight 45s linear infinite;
+    }
+
+    .review-card {
+      width: 360px;
+      min-height: 160px;
+      background: var(--white);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 26px rgba(47, 36, 29, 0.1);
+      font-family: Arial, sans-serif;
+    }
+
+    .review-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 14px;
+    }
+
+    .review-card strong {
+      color: var(--brown);
+    }
+
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    .faqs {
+      background: var(--white);
+    }
+
+    .faq-wrap {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #eadfce;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 22px 0;
+      background: transparent;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.15rem;
+      color: var(--dark);
+      cursor: pointer;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+    }
+
+    .faq-answer p {
+      padding-bottom: 20px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 180px;
+    }
+
+    .contact {
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .contact-info {
+      background: var(--white);
+      padding: 34px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      font-family: Arial, sans-serif;
+    }
+
+    .contact-info h3 {
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      margin-bottom: 22px;
+    }
+
+    .contact-info p {
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    .contact-info strong {
+      display: block;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .map {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 420px;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      min-height: 420px;
+    }
+
+    footer {
+      background: var(--dark);
+      color: var(--sand);
+      text-align: center;
+      padding: 28px 7%;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .services-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      section {
+        padding: 70px 6%;
+      }
+
+      .about-box,
+      .booking-card {
+        padding: 32px 22px;
+      }
+
+      .review-card {
+        width: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="#home" class="logo">Wellness Massage</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#booking">Booking</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-bg active" style="background-image:url('https://i.pinimg.com/1200x/dc/36/fe/dc36feaf9cc11bec29cc3de7834c539e.jpg')"></div>
+    <div class="hero-bg" style="background-image:url('https://i.pinimg.com/736x/86/47/ef/8647ef5b51553a8e57ca32e6b2ec74f0.jpg')"></div>
+    <div class="hero-bg" style="background-image:url('https://i.pinimg.com/1200x/cb/a2/38/cba2382cc3ca28d467b85d939121c8ef.jpg')"></div>
+
+    <div class="hero-content">
+      <div class="eyebrow">Relax • Restore • Renew</div>
+      <h1>Professional Massage in Santa Ana</h1>
+      <p>
+        Step into a calm, private space designed to release stress,
+        ease tension, and bring your body back to balance.
+      </p>
+      <a href="#booking" class="btn">Book Now</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-title">
+      <span>About Us</span>
+      <h2>A Quiet Space for Complete Relaxation</h2>
+    </div>
+
+    <div class="about-box">
+      <p>
+        Wellness Massage offers a clean, peaceful, and private environment where every visit is centered on comfort and relaxation.
+        Our treatment rooms are designed to feel calm, simple, and welcoming, giving you a quiet break from daily stress.
+        Whether you are looking to unwind, relieve body tension, or enjoy a restorative wellness moment, our space is prepared
+        to help you feel at ease from the moment you arrive.
+      </p>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-title">
+      <span>Services & Pricing</span>
+      <h2>Massage Services</h2>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-carousel">
+          <img class="active" src="https://i.pinimg.com/1200x/dc/36/fe/dc36feaf9cc11bec29cc3de7834c539e.jpg" alt="Body massage room">
+          <img src="https://i.pinimg.com/736x/4c/2b/cb/4c2bcb39fbc7189277e8e505c2e1bc8f.jpg" alt="Relaxing body work massage">
+          <img src="https://i.pinimg.com/736x/c0/e8/3f/c0e83fc3058518c785d6cfe1b15da601.jpg" alt="Body work massage">
+        </div>
+        <div class="service-content">
+          <h3>Body Massage</h3>
+          <p>
+            A relaxing full-body session without hot stones. Ideal for daily stress, general muscle tension,
+            tired shoulders, and anyone who wants a calm reset.
+          </p>
+          <div class="price-list">
+            <div class="price-row"><span>30 Minutes</span><strong>$35</strong></div>
+            <div class="price-row"><span>60 Minutes</span><strong>$45</strong></div>
+            <div class="price-row"><span>90 Minutes</span><strong>$70</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-carousel">
+          <img class="active" src="https://i.pinimg.com/736x/86/47/ef/8647ef5b51553a8e57ca32e6b2ec74f0.jpg" alt="Deep tissue massage">
+          <img src="https://i.pinimg.com/736x/a4/c5/f0/a4c5f0fb2704f75aa94a247e18a4af14.jpg" alt="Deep tissue back massage">
+          <img src="https://i.pinimg.com/736x/85/e4/e0/85e4e0455458e84ff5b39582cf45a340.jpg" alt="Focused deep tissue massage">
+          <img src="https://i.pinimg.com/1200x/cb/a2/38/cba2382cc3ca28d467b85d939121c8ef.jpg" alt="Deep tissue therapy">
+        </div>
+        <div class="service-content">
+          <h3>Shiatsu Deep Tissue Massage</h3>
+          <p>
+            A focused 60-minute massage designed for deeper pressure and stubborn tension.
+            Great for guests with tight backs, stiff shoulders, or stress-related muscle discomfort.
+          </p>
+          <div class="price-list">
+            <div class="price-row"><span>60 Minutes</span><strong>$60</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-carousel">
+          <img class="active" src="https://i.pinimg.com/736x/2b/dd/09/2bdd092f7df30c182dec5dc5c6209634.jpg" alt="Relaxing massage setup">
+        </div>
+        <div class="service-content">
+          <h3>Combo Package</h3>
+          <p>
+            A value-focused 60-minute session for guests who want a balanced massage experience.
+            Best for relaxation, general fatigue, and a simple wellness break during a busy week.
+          </p>
+          <div class="price-list">
+            <div class="price-row"><span>60 Minutes</span><strong>$50</strong></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="booking" id="booking">
+    <div class="booking-card">
+      <h2>Ready to Relax?</h2>
+      <p>
+        Call Wellness Massage to book your appointment or ask about availability today.
+      </p>
+      <a href="tel:9493758978" class="btn">Call 949-375-8978</a>
+    </div>
+  </section>
+
+  <section class="testimonials" id="reviews">
+    <div class="section-title">
+      <span>Testimonials</span>
+      <h2>What Guests Are Saying</h2>
+    </div>
+
+    <div class="review-row left">
+      <div class="review-card"><p>“Very clean and peaceful. I felt relaxed as soon as I walked in.”</p><strong>— Emily R.</strong></div>
+      <div class="review-card"><p>“The pressure was perfect and my shoulders felt so much better afterward.”</p><strong>— Daniel K.</strong></div>
+      <div class="review-card"><p>“Great value, quiet room, and a very comfortable experience.”</p><strong>— Sophia L.</strong></div>
+      <div class="review-card"><p>“I booked a 60-minute body massage and left feeling completely refreshed.”</p><strong>— Michael T.</strong></div>
+      <div class="review-card"><p>“Simple, professional, and relaxing. Exactly what I needed after work.”</p><strong>— Amanda C.</strong></div>
+
+      <div class="review-card"><p>“Very clean and peaceful. I felt relaxed as soon as I walked in.”</p><strong>— Emily R.</strong></div>
+      <div class="review-card"><p>“The pressure was perfect and my shoulders felt so much better afterward.”</p><strong>— Daniel K.</strong></div>
+      <div class="review-card"><p>“Great value, quiet room, and a very comfortable experience.”</p><strong>— Sophia L.</strong></div>
+      <div class="review-card"><p>“I booked a 60-minute body massage and left feeling completely refreshed.”</p><strong>— Michael T.</strong></div>
+      <div class="review-card"><p>“Simple, professional, and relaxing. Exactly what I needed after work.”</p><strong>— Amanda C.</strong></div>
+    </div>
+
+    <div class="review-row right">
+      <div class="review-card"><p>“The deep tissue massage helped with tension in my back and neck.”</p><strong>— Jason M.</strong></div>
+      <div class="review-card"><p>“Friendly service and a calm atmosphere. I will definitely come back.”</p><strong>— Olivia S.</strong></div>
+      <div class="review-card"><p>“The room was quiet and private, and the whole visit felt very relaxing.”</p><strong>— Brian H.</strong></div>
+      <div class="review-card"><p>“I liked the clear pricing and easy booking by phone.”</p><strong>— Rachel P.</strong></div>
+      <div class="review-card"><p>“A comfortable local massage spot with fair prices and a soothing environment.”</p><strong>— Kevin W.</strong></div>
+
+      <div class="review-card"><p>“The deep tissue massage helped with tension in my back and neck.”</p><strong>— Jason M.</strong></div>
+      <div class="review-card"><p>“Friendly service and a calm atmosphere. I will definitely come back.”</p><strong>— Olivia S.</strong></div>
+      <div class="review-card"><p>“The room was quiet and private, and the whole visit felt very relaxing.”</p><strong>— Brian H.</strong></div>
+      <div class="review-card"><p>“I liked the clear pricing and easy booking by phone.”</p><strong>— Rachel P.</strong></div>
+      <div class="review-card"><p>“A comfortable local massage spot with fair prices and a soothing environment.”</p><strong>— Kevin W.</strong></div>
+    </div>
+  </section>
+
+  <section class="faqs" id="faq">
+    <div class="section-title">
+      <span>FAQs</span>
+      <h2>Common Questions</h2>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-question">How early should I arrive? <span>+</span></button>
+        <div class="faq-answer">
+          <p>Please arrive about 5–10 minutes early so you have time to check in and get comfortable before your session.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I get a massage if I have an injury? <span>+</span></button>
+        <div class="faq-answer">
+          <p>If you have a recent injury, medical condition, or serious pain, please consult your healthcare provider before booking and let us know before your session begins.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What is your cancellation policy? <span>+</span></button>
+        <div class="faq-answer">
+          <p>Please call as soon as possible if you need to cancel or reschedule, so the appointment time can be made available to another guest.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is there parking available? <span>+</span></button>
+        <div class="faq-answer">
+          <p>Parking availability may vary by time of day. Please call ahead if you have questions before your visit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="section-title">
+      <span>Contact & Location</span>
+      <h2>Visit Wellness Massage</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Wellness Massage</h3>
+
+        <p>
+          <strong>Phone</strong>
+          <a href="tel:9493758978">949-375-8978</a>
+        </p>
+
+        <p>
+          <strong>Address</strong>
+          1055 W 1st St D<br>
+          Santa Ana, CA 92703
+        </p>
+
+        <p>
+          <strong>Business Hours</strong>
+          Please call to confirm today’s hours.
+        </p>
+
+        <a href="tel:9493758978" class="btn">Call Now</a>
+      </div>
+
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps?q=1055%20W%201st%20St%20D%2C%20Santa%20Ana%2C%20CA%2092703&output=embed"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Wellness Massage. All rights reserved.
+  </footer>
+
+  <script>
+    const heroSlides = document.querySelectorAll(".hero-bg");
+    let heroIndex = 0;
+
+    setInterval(() => {
+      heroSlides[heroIndex].classList.remove("active");
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add("active");
+    }, 4200);
+
+    document.querySelectorAll(".service-carousel").forEach((carousel) => {
+      const images = carousel.querySelectorAll("img");
+      let index = 0;
+
+      if (images.length > 1) {
+        setInterval(() => {
+          images[index].classList.remove("active");
+          index = (index + 1) % images.length;
+          images[index].classList.add("active");
+        }, 3500);
+      }
+    });
+
+    document.querySelectorAll(".faq-question").forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = button.parentElement;
+        item.classList.toggle("active");
+        button.querySelector("span").textContent = item.classList.contains("active") ? "−" : "+";
+      });
+    });
+  </script>
+</body>
+</html>
